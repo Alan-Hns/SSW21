@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   res.status(200).json(
     {
       endpoint: 'Pacientes',
-      updates: new Date(2022,0,19,18,41,00)
+      updates: new Date(2022, 0, 19, 18, 41, 00)
     }
   );
 }); //GET /
@@ -16,12 +16,12 @@ router.get('/', (req, res) => {
 router.get('/all', async (req, res) => {
   try {
     const rows = await pacienteModel.getAll();
-    res.status(200).json({status:'ok', pacientes: rows});
+    res.status(200).json({ status: 'ok', pacientes: rows });
   } catch (ex) {
     console.log(ex);
-    res.status(500).json({status:'failed'});
+    res.status(500).json({ status: 'failed' });
   }
-} );
+});
 // /byid/1;
 router.get('/byid/:id', async (req, res) => {
   try {
@@ -67,15 +67,15 @@ router.post('/new', async (req, res) => {
 
 //router.put();
 router.put('/update/:id', async (req, res) => {
-  try{
+  try {
     const { nombres, apellidos, identidad, email, telefono } = req.body;
     const { id } = req.params;
     const result = await pacienteModel.updateOne(id, nombres, apellidos, identidad, telefono, email);
     res.status(200).json({
-      status:'ok',
+      status: 'ok',
       result
     });
-  } catch(ex){
+  } catch (ex) {
     console.log(ex);
     res.status(500).json({ status: 'failed' });
   }
