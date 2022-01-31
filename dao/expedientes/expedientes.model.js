@@ -43,6 +43,60 @@ class Expedientes {
       });
     });
   }
+
+  getById(id) {
+    return new Promise((accept, reject) => {
+      db.get(
+        'SELECT * from expedientes where id=?;',
+        [id],
+        (err, row) => {
+          if (err) {
+            console.error(err);
+            reject(err);
+          } else {
+            accept(row);
+          }
+        });
+    });
+  }
+
+  updateOne(id, identidad, fecha, descripcion, observacion, registros, ultimaActualizacion) {
+    return new Promise(
+      (accept, reject) => {
+        const sqlUpdate = 'UPDATE expedientes set identidad = ?, fecha = ?, descripcion = ?, observacion = ?, registros = ?, ultimaActualizacion = ? where id = ?;';
+        db.run(
+          sqlUpdate,
+          [identidad, fecha, descripcion, observacion, registros, ultimaActualizacion, id],
+          function (err) {
+            if (err) {
+              reject(err);
+            } else {
+              accept(this);
+            }
+          }
+        );
+      }
+    );
+  }
+
+  deleteOne(id) {
+    return new Promise(
+      (accept, reject) => {
+        const sqlDelete = 'DELETE FROM expedientes where id = ?;';
+        db.run(
+          sqlDelete,
+          [id],
+          function (err) {
+            if (err) {
+              reject(err);
+            } else {
+              accept(this);
+            }
+          }
+        );
+      }
+    );
+  }
 }
 
 module.exports = Expedientes;
