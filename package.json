@@ -10,8 +10,13 @@
     "debug": "~2.6.9",
     "dotenv": "^14.3.0",
     "express": "~4.16.1",
+    "mongodb": "^4.3.1",
     "morgan": "~1.9.1",
     "sqlite": "^4.0.23",
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^4.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.4.7",
+    "supertest": "^6.2.2"
   }
 }
